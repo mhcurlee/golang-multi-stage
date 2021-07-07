@@ -2,13 +2,18 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"log"
 	"net/http"
 )
 
 func main() {
 	// Simple static webserver:
-	fmt.Println("Listening on port 8080.....")
-	log.Fatal(http.ListenAndServe(":8080", http.FileServer(http.Dir("/html"))))
+        
+        portNumber := os.Getenv("WEBSERVER_PORT")
+
+	fmt.Println("Listening on port: " + portNumber + " .....")
+	log.Fatal(http.ListenAndServe(":" + portNumber, http.FileServer(http.Dir("./html"))))
 
 }
+
